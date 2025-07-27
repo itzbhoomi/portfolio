@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import Particles from 'react-tsparticles'
-import { loadFull } from 'tsparticles'
 import { Button } from '@/components/ui/button'
 import CurvedLoop from '@/components/CurvedLoop'
 import Navbar from '@/components/Navbar'
@@ -11,22 +9,13 @@ import SkillsPage from './skills'
 import ProjectsGallery from '@/components/ProjectCarousel'
 import ModelViewer from '@/components/ModelViewer'
 import DotGrid from '@/components/DotGrid'
+import useIsMobile from '@/hooks/isMobile'
 
 const roles = ['Full Stack Developer', 'Creative Coder', 'Tech Explorer', 'Problem Solver']
 
 export default function HeroSection() {
+  const isMobile = useIsMobile()
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
-
-  // ⛔ Disable custom cursor or effects on mobile
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -77,11 +66,11 @@ export default function HeroSection() {
             returnDuration={1.5}
           />
         )}
+
         <Navbar />
 
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          {/* 🌟 Hero Content */}
-          <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-6 sm:p-10 md:p-16 w-full max-w-2xl">
+          <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-6 sm:p-10 md:p-16 w-full max-w-4xl">
             <motion.h1
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -120,24 +109,28 @@ export default function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
             >
-              <Button className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition">
+              <a className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition">
                 View My Work
-              </Button>
-              <Button className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition">
-                Contact me
-              </Button>
+              </a>
+
+              {/* 🔽 Download Resume Button */}
+              <a
+                href="/Bhoomi_Resume.pdf"
+                download
+                className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition inline-block"
+              >
+                Resume
+              </a>
             </motion.div>
           </div>
 
-          {/* 🧊 3D Model Viewer */}
-          <div className="w-full lg:w-1/2 h-[400px] md:h-[500px] flex justify-center items-center">
+          <div className="w-full lg:w-1/2 h-[250px] sm:h-[350px] md:h-[450px] flex justify-center items-center">
             <div className="w-full h-full">
               <ModelViewer />
             </div>
           </div>
         </div>
 
-        {/* Curved Marquee */}
         <div className="mt-20">
           <CurvedLoop
             marqueeText="Creativity ✦ Problem Solving ✦ Exploration ✦"
@@ -149,13 +142,11 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* Skills Section */}
-        <div>
+        <div className="pb-32 sm:pb-48">
           <SkillsPage />
         </div>
 
-        {/* Projects Carousel */}
-        <div className="mt-[-150px] md:mt-[-200px]">
+        <div className="mt-[-80px] sm:mt-[-150px] md:mt-[-200px]">
           <h1 className="text-4xl md:text-5xl font-extrabold text-center">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-800">
               Projects
@@ -165,5 +156,5 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }
