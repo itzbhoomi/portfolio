@@ -6,7 +6,7 @@ export default function Navbar() {
   return (
     <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
       <div className="backdrop-blur-sm bg-white/20 border border-black/10 shadow-md rounded-full px-6 py-3 flex gap-4">
-        {['Skills', 'Work', 'Experience'].map((item) => (
+        {['Home', 'Skills', 'Projects'].map((item) => (
           <Link
             key={item}
             href={`#${item.toLowerCase()}`}

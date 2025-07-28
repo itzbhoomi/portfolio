@@ -51,7 +51,6 @@ export default function HeroSection() {
         "Gift card and brochure customization",
         "Business card printing",
         "Order tracking system",
-        
       ],
       technologies: ["Next.js", "Tailwind CSS", "Prisma", "ShadCN", "Lucide React"],
     },
@@ -85,10 +84,9 @@ export default function HeroSection() {
       technologies: ["Next.js", "Tailwind CSS", "Recharts", "TypeScript"],
     },
   ];
-  
 
   return (
-    <section
+    <main
       className={`relative min-h-screen w-full overflow-hidden px-4 md:px-20 py-20
         bg-gradient-to-br from-purple-400 via-pink-200 to-blue-400
         ${isMobile ? 'cursor-auto' : 'custom-cursor'}
@@ -111,71 +109,75 @@ export default function HeroSection() {
 
         <Navbar />
 
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-6 sm:p-10 md:p-16 w-full max-w-4xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg"
-            >
-              Hi,<br /> I’m{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-800">
-                Bhoomi
-              </span>
-            </motion.h1>
-
-            <motion.p
-              key={roles[currentIndex]}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-xl sm:text-2xl mt-4 text-black font-semibold drop-shadow"
-            >
-              {roles[currentIndex]}
-            </motion.p>
-
-            <motion.p
-              className="text-base sm:text-lg mt-6 text-black max-w-2xl"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 1 }}
-            >
-              Full-stack developer passionate about building fast, scalable, and interactive web experiences. From backend systems to beautiful UI and 3D interactions — I turn ideas into smooth, real-time digital products.
-            </motion.p>
-
-            <motion.div
-              className="flex flex-wrap justify-start gap-4 mt-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
-              <button
-                onClick={() => setIsChatModalOpen(true)}
-                className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition"
+        {/* HERO Section */}
+        <section id="home" className="scroll-mt-28">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="relative z-10 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-6 sm:p-10 md:p-16 w-full max-w-4xl">
+              <motion.h1
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg"
               >
-                Talk to my chatbot to know more about me
-              </button>
+                Hi,<br /> I’m{' '}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-800">
+                  Bhoomi
+                </span>
+              </motion.h1>
 
-              <a
-                href="/Bhoomi_Resume.pdf"
-                download
-                className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition inline-block"
+              <motion.p
+                key={roles[currentIndex]}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-xl sm:text-2xl mt-4 text-black font-semibold drop-shadow"
               >
-                Resume
-              </a>
-            </motion.div>
-          </div>
+                {roles[currentIndex]}
+              </motion.p>
 
-          <div className="w-full lg:w-1/2 h-[250px] sm:h-[350px] md:h-[450px] flex justify-center items-center">
-            <div className="w-full h-full">
-              <ModelViewer />
+              <motion.p
+                className="text-base sm:text-lg mt-6 text-black max-w-2xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 1 }}
+              >
+                Full-stack developer passionate about building fast, scalable, and interactive web experiences. From backend systems to beautiful UI and 3D interactions — I turn ideas into smooth, real-time digital products.
+              </motion.p>
+
+              <motion.div
+                className="flex flex-wrap justify-start gap-4 mt-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
+                <button
+                  onClick={() => setIsChatModalOpen(true)}
+                  className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition"
+                >
+                  Talk to my chatbot to know more about me
+                </button>
+
+                <a
+                  href="/Bhoomi_Resume.pdf"
+                  download
+                  className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition inline-block"
+                >
+                  Resume
+                </a>
+              </motion.div>
+            </div>
+
+            <div className="w-full lg:w-1/2 h-[250px] sm:h-[350px] md:h-[450px] flex justify-center items-center">
+              <div className="w-full h-full">
+                <ModelViewer />
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="mt-20">
+        {/* Work Section */}
+        <section id="work" className="scroll-mt-28 mt-20">
           <CurvedLoop
             marqueeText="Creativity ✦ Problem Solving ✦ Exploration ✦"
             speed={100}
@@ -184,23 +186,25 @@ export default function HeroSection() {
             interactive={true}
             className="custom-text-style"
           />
-        </div>
+        </section>
 
-        <div className="pb-32 sm:pb-48">
+        {/* Skills Section */}
+        <section id="skills" className="scroll-mt-28 pb-32 sm:pb-48">
           <SkillsPage />
-        </div>
+        </section>
 
-        <div className="mt-[-80px] sm:mt-[-150px] md:mt-[-200px]">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-center">
+        {/* Projects Section */}
+        <section id="projects" className="scroll-mt-28 mt-[-80px] sm:mt-[-150px] md:mt-[-200px]">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-8">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-800">
               Projects
             </span>
           </h1>
           <ProjectsGallery projects={sampleProjects} />
-        </div>
+        </section>
       </div>
 
       <ChatModal isOpen={isChatModalOpen} onClose={() => setIsChatModalOpen(false)} />
-    </section>
+    </main>
   )
 }
