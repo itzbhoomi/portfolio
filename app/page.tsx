@@ -41,23 +41,51 @@ export default function HeroSection() {
   const sampleProjects = [
     {
       title: "Chhapo",
-      description: "Chhapo is a modern, customizable print-on-demand platform built with Next.js, Tailwind CSS, and Prisma.",
+      description:
+        "Chhapo is a modern, customizable print-on-demand platform built with Next.js, Tailwind CSS, and Prisma.",
       imageSrc: "/chhapo.png",
       projectUrl: "https://chhapo.vercel.app",
+      gitHub: "https://github.com/itzbhoomi/chhapo-web",
+      keyFeatures: [
+        "Bulk document printing",
+        "Gift card and brochure customization",
+        "Business card printing",
+        "Order tracking system",
+        
+      ],
+      technologies: ["Next.js", "Tailwind CSS", "Prisma", "ShadCN", "Lucide React"],
     },
     {
       title: "The Tasty Trails",
-      description: "A recipe website with 100+ dishes and category filters, daily highlights, and full instructions.",
+      description:
+        "A recipe website with 100+ dishes and category filters, daily highlights, and full instructions.",
       imageSrc: "/thetastytrails.png",
       projectUrl: "https://thetastytrails.vercel.app",
+      gitHub: "https://github.com/itzbhoomi/thetastytrails",
+      keyFeatures: [
+        "Searchable recipe catalog",
+        "Top 5 daily picks",
+        "Interactive recipe cards",
+        "Category filtering and ratings",
+      ],
+      technologies: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
     },
     {
       title: "realityCheque",
-      description: "Analytics dashboard with real‑time data visualisations",
+      description: "Analytics dashboard with real‑time data visualisations.",
       imageSrc: "/realityCheque.jpeg",
       projectUrl: "https://demo.com/dashboard-a",
+      gitHub: "https://github.com/itzbhoomi/realityCheque",
+      keyFeatures: [
+        "Visual tracking of expenses",
+        "Category-wise budget stats",
+        "Real-time graph updates",
+        "Dark/light mode UI",
+      ],
+      technologies: ["Next.js", "Tailwind CSS", "Recharts", "TypeScript"],
     },
   ];
+  
 
   return (
     <section

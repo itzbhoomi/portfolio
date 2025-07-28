@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { X } from 'lucide-react';
 
 interface ChatMessage {
@@ -19,7 +21,6 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
   const [loading, setLoading] = useState(false);
   const [hasIntroduced, setHasIntroduced] = useState(false);
 
-  // Prevent background scroll when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -28,9 +29,12 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
         setChatHistory([
           {
             role: 'ai',
-            text: `Hiya! I'm Wobbly 🐼 — your friendly panda and Bhoomi's coding buddy! \nI'm here to guide you through Bhoomi's world of code, creativity, and caffeine-fueled engineering magic.
-Want to learn about Bhoomi's projects? Skills? Education? Or just curious about what makes her portfolio tick?
-Ask me anything I don't bite... unless you're a bug in the code.😌🌿💻`,
+            text: `Hiya! I'm **Wobbly** 🐼 — your friendly panda and Bhoomi's coding buddy!  
+I'm here to guide you through Bhoomi's world of code, creativity, and caffeine-fueled engineering magic.  
+Want to learn about *Bhoomi's projects*? *Skills*? *Education*?  
+Or just curious about what makes her portfolio tick?
+
+Ask me anything — I don't bite... unless you're a bug in the code. 😌🌿💻`,
           },
         ]);
         setHasIntroduced(true);
@@ -63,15 +67,17 @@ Ask me anything I don't bite... unless you're a bug in the code.😌🌿💻`,
       });
 
       const data = await response.json();
-      setChatHistory((prev) => [
-        ...prev,
-        { role: 'ai', text: data.reply || 'No response received.' },
-      ]);
+      const reply = data.reply?.trim() || 'No response received from Wobbly 🐼.';
+
+      setChatHistory((prev) => [...prev, { role: 'ai', text: reply }]);
     } catch (error) {
       console.error(error);
       setChatHistory((prev) => [
         ...prev,
-        { role: 'ai', text: 'Sorry, I encountered an error. Please try again.' },
+        {
+          role: 'ai',
+          text: 'Oops! Wobbly encountered an error. Please try again. 🐼💥',
+        },
       ]);
     } finally {
       setLoading(false);
@@ -87,7 +93,7 @@ Ask me anything I don't bite... unless you're a bug in the code.😌🌿💻`,
     >
       <div
         className="w-full max-w-2xl h-[80vh] bg-white/10 backdrop-blur-md border border-white/30 rounded-2xl shadow-lg flex flex-col relative text-white"
-        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside modal
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
@@ -105,20 +111,31 @@ Ask me anything I don't bite... unless you're a bug in the code.😌🌿💻`,
               className={`flex ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-xs md:max-w-md px-4 py-2 rounded-2xl ${
+                className={`max-w-xs md:max-w-md px-4 py-2 rounded-2xl prose prose-invert prose-p:whitespace-pre-wrap ${
                   chat.role === 'user'
                     ? 'bg-rose-500 text-white'
                     : 'bg-white/20 text-white'
                 }`}
               >
-                <p className="whitespace-pre-wrap">{chat.text}</p>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <a {...props} target="_blank" rel="noopener noreferrer" />
+                    ),
+                  }}
+                >
+                  {chat.text}
+                </ReactMarkdown>
               </div>
             </div>
           ))}
 
           {loading && (
             <div className="flex justify-start">
-              <div className="bg-white/20 text-white rounded-2xl px-4 py-2">Thinking...</div>
+              <div className="bg-white/20 text-white rounded-2xl px-4 py-2">
+                Thinking...
+              </div>
             </div>
           )}
         </div>
