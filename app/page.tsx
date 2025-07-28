@@ -10,12 +10,15 @@ import ProjectsGallery from '@/components/ProjectCarousel'
 import ModelViewer from '@/components/ModelViewer'
 import DotGrid from '@/components/DotGrid'
 import useIsMobile from '@/hooks/isMobile'
+import Link from 'next/link'
+import ChatModal from '@/components/ChatModal'
 
 const roles = ['Full Stack Developer', 'Creative Coder', 'Tech Explorer', 'Problem Solver']
 
 export default function HeroSection() {
   const isMobile = useIsMobile()
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isChatModalOpen, setIsChatModalOpen] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,6 +26,17 @@ export default function HeroSection() {
     }, 2500)
     return () => clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    if (isChatModalOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [isChatModalOpen])
 
   const sampleProjects = [
     {
@@ -109,11 +123,13 @@ export default function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
             >
-              <a className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition">
-                View My Work
-              </a>
+              <button
+                onClick={() => setIsChatModalOpen(true)}
+                className="bg-gradient-to-r from-purple-500 to-pink-400 text-white text-base px-6 py-3 rounded-full shadow-md hover:scale-105 transition"
+              >
+                Talk to my chatbot to know more about me
+              </button>
 
-              {/* 🔽 Download Resume Button */}
               <a
                 href="/Bhoomi_Resume.pdf"
                 download
@@ -155,6 +171,8 @@ export default function HeroSection() {
           <ProjectsGallery projects={sampleProjects} />
         </div>
       </div>
+
+      <ChatModal isOpen={isChatModalOpen} onClose={() => setIsChatModalOpen(false)} />
     </section>
   )
 }
